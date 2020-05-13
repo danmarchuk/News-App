@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="top_stories">Top Stories</string>
+    <string name="popular_articles">Popular Articles</string>
+    <string name="books">Books</string>
+    <string name="search">Search</string>
+
+</resources>
