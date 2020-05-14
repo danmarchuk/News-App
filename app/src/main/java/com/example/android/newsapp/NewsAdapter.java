@@ -12,13 +12,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class NewsAdapter extends ArrayAdapter<News> {
+    private static Context context;
     private int mColorResourceId;
+
     public NewsAdapter(@NonNull Activity context, ArrayList<News> news, int colorResourceId) {
         super(context, 0, news);
         mColorResourceId = colorResourceId;
+    }
+
+    public NewsAdapter(Activity context, ArrayList<News> news) {
+        super(context, 0, news);
     }
 
 
@@ -28,19 +36,22 @@ public class NewsAdapter extends ArrayAdapter<News> {
         View listItemView = convertView;
         if (listItemView == null){
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.news_item, parent, false);
+            listItemView.setBackgroundResource(R.drawable.roundercorner);
         }
 
         News currentNews = getItem(position);
 
 
-        ImageView image = (ImageView) listItemView.findViewById(R.id.image);
-        image.setImageResource(currentNews.getImage());
+        ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
+        if (currentNews != null){
+            Glide.with(this.getContext()).load(currentNews.getImage()).into(imageView);
+        }
 
         TextView titleTextView = (TextView) listItemView.findViewById(R.id.title_text_view);
-        titleTextView.setText(currentNews.getAuthor());
+        titleTextView.setText(currentNews.getTitle());
 
         TextView newsAbstractTextView = (TextView) listItemView.findViewById(R.id.news_abstract_text_view);
-        newsAbstractTextView.setText(currentNews.getAuthor());
+        newsAbstractTextView.setText(currentNews.getAbstract());
 
         TextView authorTextView = (TextView) listItemView.findViewById(R.id.author_text_view);
         authorTextView.setText(currentNews.getAuthor());
@@ -48,4 +59,9 @@ public class NewsAdapter extends ArrayAdapter<News> {
         return listItemView;
 
     }
+
+    public void loadImageByInternetUrl(String url, ImageView image){
+
+    }
+
 }

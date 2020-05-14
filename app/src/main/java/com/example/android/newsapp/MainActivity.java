@@ -3,11 +3,16 @@ package com.example.android.newsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.EventLog;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,4 +28,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
+
+
 }

@@ -2,12 +2,14 @@ package com.example.android.newsapp;
 
 public class News {
 
-    private int mImage;
+    private String mImage;
     private String mTitle;
     private String mAbstract;
     private String mAuthor;
+    private String mUrl;
 
-    public News(String title, String newsAbstract, String author, int image) {
+
+    public News(String title, String newsAbstract, String author, String image) {
         mTitle = title;
         mAbstract = newsAbstract;
         mAuthor = author;
@@ -17,6 +19,6 @@ public class News {
     public String getTitle() {return mTitle;}
     public String getAbstract() {return mAbstract;}
     public String getAuthor() {return mAuthor;}
-    public int getImage() {return mImage;}
+    public String getImage() {return mImage;}
 
 }
