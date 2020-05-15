@@ -5,4 +5,20 @@
     <string name="books">Books</string>
     <string name="search">Search</string>
 
+
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">Top Stories Settings</string>
+
+    <string name="settings_top_story_label">Which Top Story Do You Want to Read</string>
+    <string name="settings_top_Story_key" translatable="false">top_story</string>
+    <string name="settings_top_story_default" translatable="false">arts</string>
+
+
+    <!-- Label for order-by magnitude option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_magnitude_label">Arts</string>
+
+    <!-- Label for order-by most recent option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_most_recent_label">Home</string>
+    <string name="settings_order_by_most_recent_value" translatable="false">time</string>
+
 </resources>

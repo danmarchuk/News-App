@@ -1,7 +1,11 @@
 package com.example.android.newsapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -27,8 +31,17 @@ public class TopStories extends AppCompatActivity {
 
         ListView newsListView = (ListView) findViewById(R.id.list);
         mAdapter = new NewsAdapter(this, new ArrayList<News>());
-
         newsListView.setAdapter(mAdapter);
+
+        newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                News currentNews = mAdapter.getItem(position);
+                String url = currentNews.getUrl();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        });
 
         // Start the AsyncTask to fetch the earthquake data
         NewsAsyncTask task = new NewsAsyncTask();
@@ -62,5 +75,23 @@ public class TopStories extends AppCompatActivity {
         }
     }
 
+    @Override
+    // This method initialize the contents of the Activity's options menu.
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the Options Menu we specified in XML
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }
