@@ -14,5 +14,6 @@
     android:layout_marginRight="15dp"
     android:layout_height="match_parent"
     android:dividerHeight="15dp"
-    android:divider="@null"/>
+    android:divider="@null"
+    android:scrollbars="none"/>
 </LinearLayout>

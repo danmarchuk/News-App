@@ -77,9 +77,10 @@ public class QueryUtils {
                 JSONObject uUrl = currentUrl.getJSONObject(4);
                 String title = currentNews.getString("title");
                 String newsAbstract = currentNews.getString("abstract");
+                String newsUrl = currentNews.getString("url");
                 String author = currentNews.getString("byline");
-                String url = uUrl.getString("url");
-                News aNews = new News(title, newsAbstract, author, url);
+                String imageUrl = uUrl.getString("url");
+                News aNews = new News(title, newsAbstract, author, imageUrl, newsUrl);
                 news.add(aNews);
             }
 

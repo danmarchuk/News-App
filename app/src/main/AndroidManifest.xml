@@ -21,6 +21,15 @@
         <activity
             android:name=".TopStories"
             android:label="@string/top_stories"/>
+
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.newsapp.TopStories"/>
+        </activity>
     </application>
 
 </manifest>

@@ -5,4 +5,26 @@
     <string name="books">Books</string>
     <string name="search">Search</string>
 
+
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">Top Stories Settings</string>
+
+
+
+    <string name="settings_top_story_label">Which Top Story Do You Want to Read?</string>
+    <string name="settings_top_story_key" translatable="false">top_story</string>
+    <string name="settings_top_story_default" translatable="false">@string/settings_choose_arts_value</string>
+
+    <!-- Label for arts [CHAR LIMIT=20] -->
+    <string name="settings_choose_arts">Arts</string>
+    <string name="settings_choose_arts_value" translatable="false">arts.json</string>
+
+    <!-- Label for home [CHAR LIMIT=20] -->
+    <string name="settings_choose_home">Home</string>
+    <string name="settings_choose_home_value" translatable="false">home.json</string>
+
+    <!-- Label for science [CHAR LIMIT=20] -->
+    <string name="settings_choose_science">Science</string>
+    <string name="settings_choose_science_value" translatable="false">science.json</string>
+
 </resources>
