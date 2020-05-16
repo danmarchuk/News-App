@@ -6,6 +6,6 @@
         android:defaultValue="@string/settings_top_story_default"
         android:entries="@array/settings_order_by_labels"
         android:entryValues="@array/settings_order_by_values"
-        android:key="@string/settings_top_story_label"
+        android:key="@string/settings_top_story_key"
         android:title="@string/settings_top_story_label" />
 </PreferenceScreen>

@@ -1,29 +1,31 @@
 package com.example.android.newsapp;
 
+import android.app.LoaderManager;
 import android.content.Intent;
+import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopStories extends AppCompatActivity {
+public class TopStories extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
     private NewsAdapter mAdapter;
     private static final String USGS_REQUEST_URL =
-            "https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=or0nO2XV3TBhzimVioinrHiMSFTwkOMb";
+            "https://api.nytimes.com/svc/topstories/v2";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,36 +45,56 @@ public class TopStories extends AppCompatActivity {
             }
         });
 
-        // Start the AsyncTask to fetch the earthquake data
-        NewsAsyncTask task = new NewsAsyncTask();
-        task.execute(USGS_REQUEST_URL);
+
+        LoaderManager loaderManager = getLoaderManager();
+        loaderManager.initLoader(1, null, this);
     }
 
 
-    private class NewsAsyncTask extends AsyncTask<String, Void, List<News>> {
-        @Override
-        protected List<News> doInBackground(String... urls) {
-            // Don't perform the request if there are no URLs, or the first URL is null.
-            if (urls.length < 1 || urls[0] == null) {
-                return null;
-            }
-            List<News> result = QueryUtils.fetchNewsData(urls[0]);
+    @Override
+    public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
 
-            return result;
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+        // getString retrieves a string value from the preferences
+        // the second parameter is the default value for this parameter
+        String topStoryTopic = sharedPreferences.getString(
+                getString(R.string.settings_top_story_key),
+                getString(R.string.settings_top_story_default));
+
+
+        //parse breaks apart the URL String that passed into its parameter
+        Uri baseUri = Uri.parse(USGS_REQUEST_URL);
+
+        // BuildUpon prepares the baseUri  that we just parsed so we can add query parameters to it
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        //Append query parameters and its value. for example the "format=geojson"
+        uriBuilder.appendPath(topStoryTopic);
+        uriBuilder.appendQueryParameter("api-key", "or0nO2XV3TBhzimVioinrHiMSFTwkOMb");
+        Log.e("affddf",uriBuilder.toString());
+
+        // Create a new loader for the given URL
+        return new NewsLoader(this, uriBuilder.toString());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<News>> loader, List<News> news) {
+
+        mAdapter.clear();
+
+        // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
+        // data set. This will trigger the ListView to update.
+        if (news != null && !news.isEmpty()) {
+            mAdapter.addAll(news);
+            // Find a reference to the {@link ListView} in the layout
         }
 
-        @Override
-        protected void onPostExecute(List<News> data) {
-            // Clear the adapter of previous earthquake data
-            mAdapter.clear();
-
-            // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
-            // data set. This will trigger the ListView to update.
-            if (data != null && !data.isEmpty()) {
-                mAdapter.addAll(data);
-            }
-        }
+    }
+    @Override
+    public void onLoaderReset(Loader<List<News>> loader) {
+        // Loader reset, so we can clear out our existing data.
+        mAdapter.clear();
     }
 
     @Override
