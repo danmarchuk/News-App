@@ -5,7 +5,6 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 
 import android.content.AsyncTaskLoader;
-import java.net.URL;
 import java.util.List;
 
 public class NewsLoader extends AsyncTaskLoader<List<News>> {
