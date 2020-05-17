@@ -5,16 +5,13 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -72,7 +69,6 @@ public class TopStories extends AppCompatActivity implements LoaderManager.Loade
         //Append query parameters and its value. for example the "format=geojson"
         uriBuilder.appendPath(topStoryTopic);
         uriBuilder.appendQueryParameter("api-key", "or0nO2XV3TBhzimVioinrHiMSFTwkOMb");
-        Log.e("affddf",uriBuilder.toString());
 
         // Create a new loader for the given URL
         return new NewsLoader(this, uriBuilder.toString());
