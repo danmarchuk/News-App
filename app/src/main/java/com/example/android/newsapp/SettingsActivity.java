@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+// SettingsActivity in which the user can choose which Top Stories they want to read
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
@@ -46,13 +47,13 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         //This method takes in a preference as its parameters,
-        // and we use setOnPreferenceChangeListener to set the current EarthquakePreferenceFragment
+        // and we use setOnPreferenceChangeListener to set the current NewsPreferenceFragment
         // instance to listen for changes to the preferences we pass in using:
         private void bindPreferenceSummaryToValue(Preference topStoryPreference) {
             topStoryPreference.setOnPreferenceChangeListener(this);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(topStoryPreference.getContext());
-            String minMagnitudeUsersInput = preferences.getString(topStoryPreference.getKey(), "");
-            onPreferenceChange(topStoryPreference, minMagnitudeUsersInput);
+            String usersInput = preferences.getString(topStoryPreference.getKey(), "");
+            onPreferenceChange(topStoryPreference, usersInput);
         }
     }
 

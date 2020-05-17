@@ -1,7 +1,6 @@
 package com.example.android.newsapp;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +16,6 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 public class NewsAdapter extends ArrayAdapter<News> {
-    private static Context context;
-    private int mColorResourceId;
-
-    public NewsAdapter(@NonNull Activity context, ArrayList<News> news, int colorResourceId) {
-        super(context, 0, news);
-        mColorResourceId = colorResourceId;
-    }
 
     public NewsAdapter(Activity context, ArrayList<News> news) {
         super(context, 0, news);
@@ -40,8 +32,8 @@ public class NewsAdapter extends ArrayAdapter<News> {
         }
 
         News currentNews = getItem(position);
-
-
+        // finds the image in xml file, casts it into imageView.
+        // Using Glide library it takes the url from the JSON file and displays it in the view
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
         if (currentNews != null){
             Glide.with(this.getContext()).load(currentNews.getImage()).into(imageView);
@@ -57,10 +49,6 @@ public class NewsAdapter extends ArrayAdapter<News> {
         authorTextView.setText(currentNews.getAuthor());
 
         return listItemView;
-
-    }
-
-    public void loadImageByInternetUrl(String url, ImageView image){
 
     }
 
