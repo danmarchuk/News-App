@@ -66,7 +66,7 @@ public class TopStories extends AppCompatActivity implements LoaderManager.Loade
         // BuildUpon prepares the baseUri  that we just parsed so we can add query parameters to it
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        //Append query parameters and its value. for example the "format=geojson"
+        //Append query parameters and its value
         uriBuilder.appendPath(topStoryTopic);
         uriBuilder.appendQueryParameter("api-key", "or0nO2XV3TBhzimVioinrHiMSFTwkOMb");
 
@@ -79,7 +79,7 @@ public class TopStories extends AppCompatActivity implements LoaderManager.Loade
 
         mAdapter.clear();
 
-        // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
+        // If there is a valid list of {@link News}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (news != null && !news.isEmpty()) {
             mAdapter.addAll(news);

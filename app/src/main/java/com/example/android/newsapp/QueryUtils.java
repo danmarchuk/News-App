@@ -1,12 +1,8 @@
 package com.example.android.newsapp;
-
-import android.media.Image;
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,7 +38,6 @@ public class QueryUtils {
         return news;
     }
 
-
     /**
      * Create a private constructor because no one should ever create a {@link QueryUtils} object.
      * This class is only meant to hold static variables and methods, which can be accessed
@@ -66,14 +61,16 @@ public class QueryUtils {
         try {
 
             //
-            // build up a list of Earthquake objects with the corresponding data.
+            // build up a list of News objects with the corresponding data.
             JSONObject jsonObj = new JSONObject(jsonResponse);
             JSONArray results = jsonObj.getJSONArray("results");
 
-            // looping through All Features
+            // looping through All results
             for (int i = 0; i < results.length(); i++) {
                 JSONObject currentNews = results.getJSONObject(i);
+                // get JSONArray in which we can find the url to the images
                 JSONArray currentUrl = currentNews.getJSONArray("multimedia");
+                // get the 5th element of the array which gives a URL to the picture with the best quality
                 JSONObject uUrl = currentUrl.getJSONObject(4);
                 String title = currentNews.getString("title");
                 String newsAbstract = currentNews.getString("abstract");
@@ -91,14 +88,9 @@ public class QueryUtils {
             Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
         }
 
-        // Return the list of earthquakes
+        // Return the list of news
         return news;
     }
-
-
-
-
-
 
 
     /**
