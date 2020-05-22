@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +30,7 @@ public class TopStories extends AppCompatActivity implements LoaderManager.Loade
     private NewsAdapter mAdapter;
     private TextView mEmptyTextView;
     private static final String USGS_REQUEST_URL =
-            "https://api.nytimes.com/svc/topstories/v2";
+            "https://content.guardianapis.com/";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,9 +93,9 @@ public class TopStories extends AppCompatActivity implements LoaderManager.Loade
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         //Append query parameters and its value
-        uriBuilder.appendPath(topStoryTopic);
-        uriBuilder.appendQueryParameter("api-key", "or0nO2XV3TBhzimVioinrHiMSFTwkOMb");
-
+        uriBuilder.appendPath("search");
+        uriBuilder.appendQueryParameter("q", topStoryTopic);
+        uriBuilder.appendQueryParameter("api-key", "8bb5be25-0692-4d97-90bb-d4cbef1062d7");
         // Create a new loader for the given URL
         return new NewsLoader(this, uriBuilder.toString());
     }

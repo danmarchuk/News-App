@@ -63,21 +63,16 @@ public class QueryUtils {
             //
             // build up a list of News objects with the corresponding data.
             JSONObject jsonObj = new JSONObject(jsonResponse);
-            JSONArray results = jsonObj.getJSONArray("results");
+            JSONObject response = jsonObj.getJSONObject("response");
+            JSONArray results = response.getJSONArray("results");
 
             // looping through All results
             for (int i = 0; i < results.length(); i++) {
                 JSONObject currentNews = results.getJSONObject(i);
-                // get JSONArray in which we can find the url to the images
-                JSONArray currentUrl = currentNews.getJSONArray("multimedia");
-                // get the 5th element of the array which gives a URL to the picture with the best quality
-                JSONObject uUrl = currentUrl.getJSONObject(4);
-                String title = currentNews.getString("title");
-                String newsAbstract = currentNews.getString("abstract");
-                String newsUrl = currentNews.getString("url");
-                String author = currentNews.getString("byline");
-                String imageUrl = uUrl.getString("url");
-                News aNews = new News(title, newsAbstract, author, imageUrl, newsUrl);
+                String title = currentNews.getString("webTitle");
+                String newsAbstract = currentNews.getString("pillarName");
+                String newsUrl = currentNews.getString("webUrl");
+                News aNews = new News(title, newsAbstract, newsUrl);
                 news.add(aNews);
             }
 

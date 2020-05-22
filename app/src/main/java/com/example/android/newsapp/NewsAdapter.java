@@ -32,21 +32,12 @@ public class NewsAdapter extends ArrayAdapter<News> {
         }
 
         News currentNews = getItem(position);
-        // finds the image in xml file, casts it into imageView.
-        // Using Glide library it takes the url from the JSON file and displays it in the view
-        ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
-        if (currentNews != null){
-            Glide.with(this.getContext()).load(currentNews.getImage()).into(imageView);
-        }
 
         TextView titleTextView = (TextView) listItemView.findViewById(R.id.title_text_view);
         titleTextView.setText(currentNews.getTitle());
 
         TextView newsAbstractTextView = (TextView) listItemView.findViewById(R.id.news_abstract_text_view);
         newsAbstractTextView.setText(currentNews.getAbstract());
-
-        TextView authorTextView = (TextView) listItemView.findViewById(R.id.author_text_view);
-        authorTextView.setText(currentNews.getAuthor());
 
         return listItemView;
 

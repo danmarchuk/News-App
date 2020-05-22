@@ -16,15 +16,15 @@
     <string name="settings_top_story_default" translatable="false">@string/settings_choose_arts_value</string>
 
     <!-- Label for arts [CHAR LIMIT=20] -->
-    <string name="settings_choose_arts">Arts</string>
-    <string name="settings_choose_arts_value" translatable="false">arts.json</string>
+    <string name="settings_choose_arts">Politics</string>
+    <string name="settings_choose_arts_value" translatable="false">politics</string>
 
     <!-- Label for home [CHAR LIMIT=20] -->
-    <string name="settings_choose_home">Home</string>
-    <string name="settings_choose_home_value" translatable="false">home.json</string>
+    <string name="settings_choose_home">Virus</string>
+    <string name="settings_choose_home_value" translatable="false">virus</string>
 
     <!-- Label for science [CHAR LIMIT=20] -->
     <string name="settings_choose_science">Science</string>
-    <string name="settings_choose_science_value" translatable="false">science.json</string>
+    <string name="settings_choose_science_value" translatable="false">science</string>
 
 </resources>
