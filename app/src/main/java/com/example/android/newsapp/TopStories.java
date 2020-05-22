@@ -1,9 +1,12 @@
 package com.example.android.newsapp;
 
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,6 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +27,7 @@ import java.util.List;
 public class TopStories extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
     private NewsAdapter mAdapter;
+    private TextView mEmptyTextView;
     private static final String USGS_REQUEST_URL =
             "https://api.nytimes.com/svc/topstories/v2";
     @Override
@@ -32,6 +39,8 @@ public class TopStories extends AppCompatActivity implements LoaderManager.Loade
         mAdapter = new NewsAdapter(this, new ArrayList<News>());
         newsListView.setAdapter(mAdapter);
 
+        mEmptyTextView = (TextView) findViewById(R.id.empty_view);
+        newsListView.setEmptyView(mEmptyTextView);
         newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -42,9 +51,25 @@ public class TopStories extends AppCompatActivity implements LoaderManager.Loade
             }
         });
 
-
-        LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(1, null, this);
+        // Get a reference to the ConnectivityManager to check state of network connectivity
+        ConnectivityManager cm =
+                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        // Get details on the currently active default data network
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        // Create a boolean which checks whether the device is connected to the Internet
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        // If the device is connected to the internet we load load the information using loader manager
+        if (isConnected){
+            LoaderManager loaderManager = getLoaderManager();
+            loaderManager.initLoader(1, null, this);
+        }
+        // if the device is not connected to the Internet we hide the progressBar and set the text of the emptyTextView to "No Internet connection"
+        else {
+            ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+            progressBar.setVisibility(View.GONE);
+            mEmptyTextView.setText(R.string.no_internet);
+        }
     }
 
 
@@ -78,8 +103,9 @@ public class TopStories extends AppCompatActivity implements LoaderManager.Loade
     public void onLoadFinished(Loader<List<News>> loader, List<News> news) {
 
         mAdapter.clear();
-
-        // If there is a valid list of {@link News}s, then add them to the adapter's
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.GONE);
+        // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (news != null && !news.isEmpty()) {
             mAdapter.addAll(news);

@@ -4,38 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
     <TextView
         android:id="@+id/top_stories"
+        style="@style/CategoryStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/top_stories"
-        style="@style/CategoryStyle"
-        android:background="@color/category_top_stories">
-    </TextView>
+        android:background="@color/category_top_stories"
+        android:text="@string/top_stories"/>
+
     <TextView
         android:id="@+id/popular_articles"
+        style="@style/CategoryStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/popular_articles"
-        style="@style/CategoryStyle"
-        android:background="@color/category_popular_articles">
-    </TextView>
+        android:background="@color/category_popular_articles"
+        android:text="@string/popular_articles"/>
+
     <TextView
         android:id="@+id/books"
+        style="@style/CategoryStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/books"
-        style="@style/CategoryStyle"
-        android:background="@color/category_books">
-    </TextView>
+        android:background="@color/category_books"
+        android:text="@string/books"/>
+
     <TextView
         android:id="@+id/search"
+        style="@style/CategoryStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/search"
-        style="@style/CategoryStyle"
-        android:background="@color/category_search">
-    </TextView>
+        android:background="@color/category_search"
+        android:text="@string/search"/>
 </LinearLayout>

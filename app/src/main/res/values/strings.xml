@@ -9,7 +9,7 @@
     <string name="settings_menu_item">Settings</string>
     <string name="settings_title">Top Stories Settings</string>
 
-
+    <string name="no_internet">No Internet Connection.</string>
 
     <string name="settings_top_story_label">Which Top Story Do You Want to Read?</string>
     <string name="settings_top_story_key" translatable="false">top_story</string>
