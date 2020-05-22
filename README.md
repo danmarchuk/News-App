@@ -5,7 +5,7 @@ News app is an app which uses XML and Java to create an application for displayi
 
   - Creating layous
   - Parsing the JSON response and convert it into text visible to the user
-  - Creating my custom adapter in `NewsAdapter.java` and custom class - `News.java
+  - Creating my custom adapter in `NewsAdapter.java` and custom class - `News.java`
   - Connecting to an API
   - Handling error cases gracefully
   - Updating information regularly
