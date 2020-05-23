@@ -27,10 +27,11 @@ import java.util.List;
 
 public class TopStories extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
-    private NewsAdapter mAdapter;
-    private TextView mEmptyTextView;
     private static final String USGS_REQUEST_URL =
             "https://content.guardianapis.com/";
+    private NewsAdapter mAdapter;
+    private TextView mEmptyTextView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,14 +55,14 @@ public class TopStories extends AppCompatActivity implements LoaderManager.Loade
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager cm =
-                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         // Get details on the currently active default data network
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         // Create a boolean which checks whether the device is connected to the Internet
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
         // If the device is connected to the internet we load load the information using loader manager
-        if (isConnected){
+        if (isConnected) {
             LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(1, null, this);
         }
@@ -95,7 +96,12 @@ public class TopStories extends AppCompatActivity implements LoaderManager.Loade
         //Append query parameters and its value
         uriBuilder.appendPath("search");
         uriBuilder.appendQueryParameter("q", topStoryTopic);
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("api-key", "8bb5be25-0692-4d97-90bb-d4cbef1062d7");
+
+        Log.e("pidor", uriBuilder.toString());
+
+        //show-tags=contributor
         // Create a new loader for the given URL
         return new NewsLoader(this, uriBuilder.toString());
     }
@@ -114,6 +120,7 @@ public class TopStories extends AppCompatActivity implements LoaderManager.Loade
         }
 
     }
+
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
         // Loader reset, so we can clear out our existing data.
