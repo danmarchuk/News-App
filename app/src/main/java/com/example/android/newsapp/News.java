@@ -2,7 +2,6 @@ package com.example.android.newsapp;
 
 public class News {
 
-
     private String mTitle;
     private String mAbstract;
     private String mAuthor;
