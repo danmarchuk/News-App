@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/category_top_stories"
-        android:text="@string/top_stories"/>
+        android:text="@string/top_stories" />
 
     <TextView
         android:id="@+id/popular_articles"
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/category_popular_articles"
-        android:text="@string/popular_articles"/>
+        android:text="@string/popular_articles" />
 
     <TextView
         android:id="@+id/books"
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/category_books"
-        android:text="@string/books"/>
+        android:text="@string/books" />
 
     <TextView
         android:id="@+id/search"
@@ -37,5 +37,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/category_search"
-        android:text="@string/search"/>
+        android:text="@string/search" />
 </LinearLayout>
