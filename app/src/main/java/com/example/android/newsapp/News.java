@@ -8,7 +8,6 @@ public class News {
     private String mAuthor;
     private String mUrl;
 
-
     public News(String title, String newsAbstract, String author,  String url) {
         mTitle = title;
         mAbstract = newsAbstract;
