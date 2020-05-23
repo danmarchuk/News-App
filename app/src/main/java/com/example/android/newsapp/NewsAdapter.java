@@ -30,19 +30,13 @@ public class NewsAdapter extends ArrayAdapter<News> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.news_item, parent, false);
             listItemView.setBackgroundResource(R.drawable.roundercorner);
         }
-
         News currentNews = getItem(position);
-
-
         TextView titleTextView = (TextView) listItemView.findViewById(R.id.title_text_view);
         titleTextView.setText(currentNews.getTitle());
-
         TextView newsAbstractTextView = (TextView) listItemView.findViewById(R.id.news_abstract_text_view);
         newsAbstractTextView.setText(currentNews.getAbstract());
-
         TextView authorTextView = (TextView) listItemView.findViewById(R.id.author_text_view);
         authorTextView.setText(currentNews.getAuthor());
-
         return listItemView;
 
     }

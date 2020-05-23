@@ -74,7 +74,6 @@ public class TopStories extends AppCompatActivity implements LoaderManager.Loade
         }
     }
 
-
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
 
@@ -145,5 +144,4 @@ public class TopStories extends AppCompatActivity implements LoaderManager.Loade
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
