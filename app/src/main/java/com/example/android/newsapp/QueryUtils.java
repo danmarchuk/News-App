@@ -1,8 +1,11 @@
 package com.example.android.newsapp;
+
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,7 +20,16 @@ import java.util.List;
 public class QueryUtils {
 
     public static final String LOG_TAG = QueryUtils.class.getSimpleName();
+    private static String authorsName;
 
+
+    /**
+     * Create a private constructor because no one should ever create a {@link QueryUtils} object.
+     * This class is only meant to hold static variables and methods, which can be accessed
+     * directly from the class name QueryUtils (and an object instance of QueryUtils is not needed).
+     */
+    private QueryUtils() {
+    }
 
     public static List<News> fetchNewsData(String requestUrl) {
         // Create URL object
@@ -36,14 +48,6 @@ public class QueryUtils {
 
         // Return the {@link Event}
         return news;
-    }
-
-    /**
-     * Create a private constructor because no one should ever create a {@link QueryUtils} object.
-     * This class is only meant to hold static variables and methods, which can be accessed
-     * directly from the class name QueryUtils (and an object instance of QueryUtils is not needed).
-     */
-    private QueryUtils() {
     }
 
     /**
@@ -69,14 +73,21 @@ public class QueryUtils {
             // looping through All results
             for (int i = 0; i < results.length(); i++) {
                 JSONObject currentNews = results.getJSONObject(i);
+                JSONArray tags = currentNews.getJSONArray("tags");
+                ;
+                if (tags.length() > 0) {
+                    JSONObject tag = tags.getJSONObject(0);
+                    authorsName = tag.getString("webTitle");
+                } else authorsName = "N/A";
+
                 String title = currentNews.getString("webTitle");
                 String newsAbstract = currentNews.getString("pillarName");
                 String newsUrl = currentNews.getString("webUrl");
-                News aNews = new News(title, newsAbstract, newsUrl);
+                News aNews = new News(title, newsAbstract, authorsName, newsUrl);
                 news.add(aNews);
             }
 
-        } catch(JSONException e){
+        } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
@@ -91,13 +102,14 @@ public class QueryUtils {
     /**
      * Returns new URL object from the given string URL.
      */
-    public static URL createUrl(String stringUrl){
+    public static URL createUrl(String stringUrl) {
         URL url = null;
         try {
             url = new URL(stringUrl);
-        } catch (MalformedURLException exception){
+        } catch (MalformedURLException exception) {
             return null;
-        } return url;
+        }
+        return url;
     }
 
     /**
